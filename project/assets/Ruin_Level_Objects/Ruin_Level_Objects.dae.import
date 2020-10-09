@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Space_Level_Objects.dae-2bc51f20d21489bdf4c0eca2067928ba.scn"
+path="res://.import/Ruin_Level_Objects.dae-901b498e88c42df8fdfd0b3837ab02e0.scn"
 
 [deps]
 
-source_file="res://assets/Space_Level_Objects/Space_Level_Objects.dae"
-dest_files=[ "res://.import/Space_Level_Objects.dae-2bc51f20d21489bdf4c0eca2067928ba.scn" ]
+source_file="res://assets/Ruin_Level_Objects/Ruin_Level_Objects.dae"
+dest_files=[ "res://.import/Ruin_Level_Objects.dae-901b498e88c42df8fdfd0b3837ab02e0.scn" ]
 
 [params]
 
@@ -19,13 +19,14 @@ nodes/storage=0
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
-meshes/compress=false
+meshes/compress=true
 meshes/ensure_tangents=true
 meshes/storage=0
 meshes/light_baking=0
 meshes/lightmap_texel_size=0.1
+skins/use_named_skins=true
 external_files/store_in_subdir=false
-animation/import=false
+animation/import=true
 animation/fps=15
 animation/filter_script=""
 animation/storage=false
