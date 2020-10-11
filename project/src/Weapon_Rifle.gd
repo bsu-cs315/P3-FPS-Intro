@@ -9,8 +9,6 @@ var is_weapon_enabled = false
 
 var player_node = null
 
-func _ready():
-	pass
 
 func fire_weapon():
 	var ray = $Ray_Cast
@@ -24,6 +22,7 @@ func fire_weapon():
 		elif body.has_method("bullet_hit"):
 			body.bullet_hit(DAMAGE, ray.global_transform)
 
+
 func equip_weapon():
 	if player_node.animation_manager.current_state == IDLE_ANIM_NAME:
 		is_weapon_enabled = true
@@ -33,6 +32,7 @@ func equip_weapon():
 		player_node.animation_manager.set_animation("Rifle_equip")
 
 	return false
+
 
 func unequip_weapon():
 

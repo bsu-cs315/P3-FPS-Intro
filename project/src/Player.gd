@@ -1,23 +1,29 @@
 extends KinematicBody
 
 const GRAVITY = -24.8
-var vel = Vector3()
+
 const MAX_SPEED = 20
 const JUMP_SPEED = 18
 const ACCEL = 4.5
 
-var dir = Vector3()
-
 const DEACCEL= 16
 const MAX_SLOPE_ANGLE = 40
+
+const MAX_SPRINT_SPEED = 30
+const SPRINT_ACCEL = 18
+
+const WEAPON_NUMBER_TO_NAME = {0:"UNARMED", 1:"KNIFE", 2:"PISTOL", 3:"RIFLE"}
+const WEAPON_NAME_TO_NUMBER = {"UNARMED":0, "KNIFE":1, "PISTOL":2, "RIFLE":3}
+
+var dir = Vector3()
+var vel = Vector3()
+
 
 var camera
 var rotation_helper
 
 var MOUSE_SENSITIVITY = 0.05
 
-const MAX_SPRINT_SPEED = 30
-const SPRINT_ACCEL = 18
 var is_sprinting = false
 
 var flashlight
@@ -26,14 +32,14 @@ var animation_manager
 
 var current_weapon_name = "UNARMED"
 var weapons = {"UNARMED":null, "KNIFE":null, "PISTOL":null, "RIFLE":null}
-const WEAPON_NUMBER_TO_NAME = {0:"UNARMED", 1:"KNIFE", 2:"PISTOL", 3:"RIFLE"}
-const WEAPON_NAME_TO_NUMBER = {"UNARMED":0, "KNIFE":1, "PISTOL":2, "RIFLE":3}
+
 var changing_weapon = false
 var changing_weapon_name = "UNARMED"
 
 var health = 100
 
 var UI_status_label
+
 
 func _ready():
 	camera = $Rotation_Helper/Camera
@@ -63,10 +69,12 @@ func _ready():
 	UI_status_label = $HUD/Panel/Gun_label
 	flashlight = $Rotation_Helper/Flashlight
 
+
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
 	process_changing_weapons(delta)
+
 
 func process_input(delta):
 
@@ -122,8 +130,8 @@ func process_input(delta):
 	if Input.is_action_just_pressed("flashlight"):
 		if flashlight.is_visible_in_tree():
 			flashlight.hide()
-	else:
-		flashlight.show()
+		else:
+			flashlight.show()
 	# ----------------------------------	
 	
 	# ----------------------------------
@@ -162,6 +170,7 @@ func process_input(delta):
 					animation_manager.set_animation(current_weapon.FIRE_ANIM_NAME)
 	# ----------------------------------
 
+
 func process_movement(delta):
 	dir.y = 0
 	dir = dir.normalized()
@@ -191,6 +200,7 @@ func process_movement(delta):
 	vel.z = hvel.z
 	vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
 
+
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
@@ -199,7 +209,8 @@ func _input(event):
 		var camera_rot = rotation_helper.rotation_degrees
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot
-		
+
+
 func process_changing_weapons(delta):
 	if changing_weapon == true:
 
@@ -231,6 +242,7 @@ func process_changing_weapons(delta):
 				changing_weapon = false
 				current_weapon_name = changing_weapon_name
 				changing_weapon_name = ""
+
 
 func fire_bullet():
 	if changing_weapon == true:

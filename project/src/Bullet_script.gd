@@ -1,12 +1,14 @@
 extends Spatial
 
+const KILL_TIMER = 4
+
 var BULLET_SPEED = 70
 var BULLET_DAMAGE = 15
 
-const KILL_TIMER = 4
 var timer = 0
 
 var hit_something = false
+
 
 func _ready():
 	$Area.connect("body_entered", self, "collided")

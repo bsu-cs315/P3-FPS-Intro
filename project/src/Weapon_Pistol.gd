@@ -11,8 +11,6 @@ var bullet_scene = preload("Bullet_Scene.tscn")
 
 var player_node = null
 
-func _ready():
-	pass
 
 func fire_weapon():
 	var clone = bullet_scene.instance()
@@ -23,6 +21,7 @@ func fire_weapon():
 	clone.scale = Vector3(4, 4, 4)
 	clone.BULLET_DAMAGE = DAMAGE
 
+
 func equip_weapon():
 	if player_node.animation_manager.current_state == IDLE_ANIM_NAME:
 		is_weapon_enabled = true
@@ -32,6 +31,7 @@ func equip_weapon():
 		player_node.animation_manager.set_animation("Pistol_equip")
 
 	return false
+
 
 func unequip_weapon():
 	if player_node.animation_manager.current_state == IDLE_ANIM_NAME:

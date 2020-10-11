@@ -46,15 +46,16 @@ var animation_speeds = {
 var current_state = null
 var callback_function = null
 
+
 func _ready():
 	set_animation("Idle_unarmed")
 	connect("animation_finished", self, "animation_ended")
+
 
 func set_animation(animation_name):
 	if animation_name == current_state:
 		print ("AnimationPlayer_Manager.gd -- WARNING: animation is already ", animation_name)
 		return true
-
 
 	if has_animation(animation_name):
 		if current_state != null:
@@ -74,7 +75,6 @@ func set_animation(animation_name):
 
 
 func animation_ended(anim_name):
-
 	# UNARMED transitions
 	if current_state == "Idle_unarmed":
 		pass
@@ -109,6 +109,7 @@ func animation_ended(anim_name):
 		set_animation("Idle_unarmed")
 	elif current_state == "Rifle_reload":
 		set_animation("Rifle_idle")
+
 
 func animation_callback():
 	if callback_function == null:
